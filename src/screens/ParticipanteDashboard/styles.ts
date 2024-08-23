@@ -124,10 +124,10 @@ export const ParticipanteDashboardPost = styled.div`
   display: flex;
   width: fit-content;
   height: fit-content;
+  min-width: 540px;
 
   img {
-    width: 100%;
-    min-width: 540px;
+    /* width: 100%; */
     max-width: 540px;
     height: auto;
   }

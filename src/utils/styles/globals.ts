@@ -13,6 +13,11 @@ export const pagePadding = '15px'
 export const adminViewHeader = '50px'
 
 const GlobalStyle = createGlobalStyle`
+
+  /* html {
+    min-height: 100%;
+    min-width: 600px;
+  } */
   :root {
     font-size: 14px;
 
@@ -108,6 +113,6 @@ export interface IEditorSelection {
   bordertopright?: number
   borderbottomright?: number
   borderbottomleft?: number
-  borderColor?: string
-  borderSize?: string
+  bordercolor?: string
+  bordersize?: string
 }

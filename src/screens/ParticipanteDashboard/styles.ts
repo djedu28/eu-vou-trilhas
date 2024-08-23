@@ -127,6 +127,7 @@ export const ParticipanteDashboardPost = styled.div`
 
   img {
     width: 100%;
+    min-width: 540px;
     max-width: 540px;
     height: auto;
   }
@@ -153,13 +154,13 @@ export const ParticipanteDashboardPostSelection = styled.div<IEditorSelection>`
 
   right: ${({ right }) => `${right}px`};
   bottom: ${({ bottom }) => `${bottom}px`};
-  /* left: ${({ left }) => `${left}px`};
-  top: ${({ top }) => `${top}px`}; */
+  /* left: ${({ left }) => `${left}px`}; 
+  top: ${({ top }) => `${top}px`};  */
 
   width: ${({ width }) => `${width}px`};
   height: ${({ height }) => `${height}px`};
 
-  aborder: ${({ borderColor, borderSize }) => `${borderSize || "2px"} solid ${borderColor}`};
+  /* aborder: ${({ bordercolor, bordersize }) => `${bordersize || "2px"} solid ${bordercolor}`}; */
   
   border-top-left-radius: ${({ bordertopleft }) => `${bordertopleft}px`};
   border-top-right-radius: ${({ bordertopright }) => `${bordertopright}px`};
@@ -190,7 +191,7 @@ export const ParticipanteDashboardPostSelection = styled.div<IEditorSelection>`
     }
   }
   .ant-upload-select {
-    border: ${({ borderColor, borderSize }) => `${borderSize || "2px"} solid ${borderColor}`} !important;
+    border: ${({ bordercolor, bordersize }) => `${bordersize || "2px"} solid ${bordercolor}`} !important;
   }
   .ant-upload.ant-upload-select {
     overflow: hidden !important;

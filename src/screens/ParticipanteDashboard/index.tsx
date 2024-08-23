@@ -1,8 +1,8 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import * as S from './styles'
 import { TbHandClick } from 'react-icons/tb'
-// import { FaInstagram, FaLinkedin, FaLock as LucideLock } from 'react-icons/fa'
+// import { FaInstagram, FaLinkedin, FaLock } from 'react-icons/fa'
 // import { TiHome } from 'react-icons/ti'
 import { LucideLock, LucideHome } from 'lucide-react';
 
@@ -51,11 +51,14 @@ function useAdmin() {
 }
 
 import { beforeUpload, onPreview } from '@/utils/functions/imageUpload'
+import useScreenSize from '@/hooks/use';
 
 interface IParticipanteDashboard { }
 
 const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
   const { adminData } = useAdmin()
+
+  const configImg = useScreenSize()
 
   const { control, watch} = useForm({
     defaultValues: {
@@ -135,6 +138,15 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
 
   const nome_informado = watch("name")
   const lock_download = !tempClientImage || !nome_informado
+
+  // const escalonar = (value: number) => {
+  //   const escala = configImg.width / 540
+  //   return value * escala
+  // }
+  
+  // const ES = escalonar
+
+  const scale = configImg.width <= 540 ? (configImg.width || 540) / 540 : 1
   return (
     <S.ParticipanteDashboard>
       <S.ParticipanteDashboardHeader>
@@ -214,80 +226,81 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
           Crie um post <b>#EuVou</b> exclusivo do Hackathon, 
           personalizado com a sua imagem.
         </S.ParticipanteDashboardHeadline>
-        <i id='CARD-PARTICIPANTE'/>
-        <S.ParticipanteDashboardPost ref={ParticipanteDashboardPostRef} id="print">
-          {adminData && adminData.editor.image ? (
-            <>
-              <img src={adminData?.editor.image} alt="Post Image" />
+        <i id='CARD-PARTICIPANTE' style= {{display:"none"}}/>
+        <div id="edt2" style={{ transform: `scale(${scale})`, marginBlock: -350 * (1- scale) }}>
+          <S.ParticipanteDashboardPost ref={ParticipanteDashboardPostRef} id="print">
+            {adminData && adminData.editor.image ? (
+              <>
+                <img src={adminData?.editor.image} alt="Post Image" />
 
-              <S.ParticipanteDashboardPostSelection
-                width={adminData?.editor.size.width || 0}
-                height={adminData?.editor.size.height || 0}
-                top={adminData?.editor.position?.top || 0}
-                right={adminData?.editor.position?.right || 0}
-                bottom={adminData?.editor.position?.bottom || 0}
-                left={adminData?.editor.position?.left || 0}
-                iscircle={adminData?.editor.border.isCircle ? 1 : 0}
-                bordertopleft={adminData?.editor.border.topLeft || 0}
-                bordertopright={adminData?.editor.border.topRight || 0}
-                borderbottomright={adminData?.editor.border.bottomRight || 0}
-                borderbottomleft={adminData?.editor.border.bottomLeft || 0}
-                borderColor = {adminData?.editor.border.color || ""}
-                borderSize = {adminData?.editor.border.size || ""}
-              >
-                <ImgCrop
-                  modalTitle="Editar Imagem"
-                  modalOk='OK'
-                  modalCancel='Cancelar'
-                  aspect={
-                    adminData?.editor.size.width / adminData?.editor.size.height
-                  }
-                  rotationSlider
+                <S.ParticipanteDashboardPostSelection
+                  width={adminData?.editor.size.width || 0}
+                  height={adminData?.editor.size.height || 0}
+                  // top={adminData?.editor.position?.top || 0}
+                  right={adminData?.editor.position?.right || 0}
+                  bottom={adminData?.editor.position?.bottom || 0}
+                  // left={adminData?.editor.position?.left || 0}
+                  iscircle={adminData?.editor.border.isCircle ? 1 : 0}
+                  bordertopleft={adminData?.editor.border.topLeft || 0}
+                  bordertopright={adminData?.editor.border.topRight || 0}
+                  borderbottomright={adminData?.editor.border.bottomRight || 0}
+                  borderbottomleft={adminData?.editor.border.bottomLeft || 0}
+                  bordercolor = {adminData?.editor.border.color || ""}
+                  bordersize = {adminData?.editor.border.size || ""}
                 >
-                  <Upload
-                    name="client-image"
-                    listType="picture-card"
-                    showUploadList={false}
-                    beforeUpload={beforeUpload}
-                    onChange={handleChangeClientImage}
-                    onPreview={onPreview}
-                    className="client-image-upload"
+                  <ImgCrop
+                    modalTitle="Editar Imagem"
+                    modalOk='OK'
+                    modalCancel='Cancelar'
+                    aspect={
+                      adminData?.editor.size.width / adminData?.editor.size.height
+                    }
+                    rotationSlider
                   >
-                    {tempClientImage ? (
-                      <img
-                        src={tempClientImage}
-                        alt="Client Image"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover'
-                        }}
-                      />
-                    ) : (
-                      <div className="client-image-instructions">
-                        <TbHandClick />
-                        Clique e adicione sua foto
-                      </div>
-                    )}
-                  </Upload>
-                </ImgCrop>
-              </S.ParticipanteDashboardPostSelection>
-            </>
-          ) : (
-            <S.ParticipanteDashboardPostLoading />
-          )}
+                    <Upload
+                      name="client-image"
+                      listType="picture-card"
+                      showUploadList={false}
+                      beforeUpload={beforeUpload}
+                      onChange={handleChangeClientImage}
+                      onPreview={onPreview}
+                      className="client-image-upload"
+                    >
+                      {tempClientImage ? (
+                        <img
+                          src={tempClientImage}
+                          alt="Client Image"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                          }}
+                        />
+                      ) : (
+                        <div className="client-image-instructions">
+                          <TbHandClick />
+                          Clique e adicione sua foto
+                        </div>
+                      )}
+                    </Upload>
+                  </ImgCrop>
+                </S.ParticipanteDashboardPostSelection>
+              </>
+            ) : (
+              <S.ParticipanteDashboardPostLoading />
+            )}
 
-          <S.Texto bottom={214}>
-            {nome_informado ||"Meu Nome"}
-          </S.Texto>
-          <Controller
-            name="name"
-            control={control}
-            rules={{ required: 'Este campo é obrigatório' }}
-            render={({ field }) => <S.Input {...field} placeholder="MEU NOME" bottom={214} /> }
-          />
-        </S.ParticipanteDashboardPost>
-
+            <S.Texto bottom={214}>
+              {nome_informado ||"Meu Nome"}
+            </S.Texto>
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: 'Este campo é obrigatório' }}
+              render={({ field }) => <S.Input {...field} placeholder="MEU NOME" bottom={214} /> }
+            />
+          </S.ParticipanteDashboardPost>
+        </div>
         <S.ParticipanteDashboardLabel>
           
           Clique no botão acima e escolha a sua melhor foto;
@@ -307,7 +320,7 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
         </S.ParticipanteDashboardLabel>
 
         <S.ParticipanteDashboardExport lock={lock_download}>
-          {/* <button onClick={handleExportImage} disabled={lock_dowload}>
+          {/* <button onClick={handleExportImage} disabled={lock_download}>
             Compartilhar no <FaInstagram />
             {!tempClientImage && (
               <S.ExportButtonLock>
@@ -315,7 +328,8 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
               </S.ExportButtonLock>
             )}
           </button>
-          <button onClick={handleExportImage} disabled={lock_dowload}>
+           */}
+          {/* <button onClick={handleExportImage} disabled={lock_download}>
             Compartilhar no <FaLinkedin />
             {!tempClientImage && (
               <S.ExportButtonLock>

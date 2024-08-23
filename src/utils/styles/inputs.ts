@@ -6,7 +6,7 @@ export interface InputName {
 }
 
 export interface LockBtn {
-  lock: boolean,
+  lock: boolean | "true" | "false",
 }
 
 export interface ICardConfig {

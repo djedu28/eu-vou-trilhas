@@ -1,8 +1,8 @@
-import { IAdminData, IUserData } from '@/@types/admin'
+import { IEditorData, IUserData } from '@/@types/data-settings'
 
-export interface IAdminContextData {
-  isAdminLogged: boolean
-  userData: IUserData | null
-  adminData: IAdminData | null
+export interface IContextData {
+  user: IUserData,
+  cardData: IEditorData | null
+  handleLogin: () => void
   handleLogout: () => void
 }

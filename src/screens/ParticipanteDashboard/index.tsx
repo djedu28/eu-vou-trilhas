@@ -23,7 +23,7 @@ import {
 
 //import { useAdmin } from '@/contexts/AdminProvider'
 function useAdmin() {
-  const adminData = {
+  const cardData = {
     editor: {
       image: "/SouTrilheiro.png",
       size: {
@@ -47,7 +47,7 @@ function useAdmin() {
       }
     }
   }
-  return { adminData }
+  return { cardData }
 }
 
 import { beforeUpload, onPreview } from '@/utils/functions/imageUpload'
@@ -56,7 +56,7 @@ import useScreenSize from '@/hooks/use';
 interface IParticipanteDashboard { }
 
 const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
-  const { adminData } = useAdmin()
+  const { cardData } = useAdmin()
 
   const configImg = useScreenSize()
 
@@ -89,9 +89,9 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
   }
 
   const handleExportImage = useCallback(async () => {
-    if (ParticipanteDashboardPostRef.current && adminData?.editor.image) {
+    if (ParticipanteDashboardPostRef.current && cardData?.editor.image) {
       try {
-        const response = await fetch(adminData.editor.image, { mode: 'cors' })
+        const response = await fetch(cardData.editor.image, { mode: 'cors' })
         const blob = await response.blob()
         const localUrl = URL.createObjectURL(blob)
 
@@ -133,7 +133,7 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
         console.error('Failed to download and export image:', err)
       }
     }
-  }, [ParticipanteDashboardPostRef, adminData])
+  }, [ParticipanteDashboardPostRef, cardData])
 
 
   const nome_informado = watch("name")
@@ -229,31 +229,31 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
         <i id='CARD-PARTICIPANTE' style= {{display:"none"}}/>
         <div id="edt2" style={{ transform: `scale(${scale})`, marginBlock: -350 * (1- scale) }}>
           <S.ParticipanteDashboardPost ref={ParticipanteDashboardPostRef} id="print">
-            {adminData && adminData.editor.image ? (
+            {cardData && cardData.editor.image ? (
               <>
-                <img src={adminData?.editor.image} alt="Post Image" />
+                <img src={cardData?.editor.image} alt="Post Image" />
 
                 <S.ParticipanteDashboardPostSelection
-                  width={adminData?.editor.size.width || 0}
-                  height={adminData?.editor.size.height || 0}
-                  // top={adminData?.editor.position?.top || 0}
-                  right={adminData?.editor.position?.right || 0}
-                  bottom={adminData?.editor.position?.bottom || 0}
-                  // left={adminData?.editor.position?.left || 0}
-                  iscircle={adminData?.editor.border.isCircle ? 1 : 0}
-                  bordertopleft={adminData?.editor.border.topLeft || 0}
-                  bordertopright={adminData?.editor.border.topRight || 0}
-                  borderbottomright={adminData?.editor.border.bottomRight || 0}
-                  borderbottomleft={adminData?.editor.border.bottomLeft || 0}
-                  bordercolor = {adminData?.editor.border.color || ""}
-                  bordersize = {adminData?.editor.border.size || ""}
+                  width={cardData?.editor.size.width || 0}
+                  height={cardData?.editor.size.height || 0}
+                  // top={cardData?.editor.position?.top || 0}
+                  right={cardData?.editor.position?.right || 0}
+                  bottom={cardData?.editor.position?.bottom || 0}
+                  // left={cardData?.editor.position?.left || 0}
+                  iscircle={cardData?.editor.border.isCircle ? 1 : 0}
+                  bordertopleft={cardData?.editor.border.topLeft || 0}
+                  bordertopright={cardData?.editor.border.topRight || 0}
+                  borderbottomright={cardData?.editor.border.bottomRight || 0}
+                  borderbottomleft={cardData?.editor.border.bottomLeft || 0}
+                  bordercolor = {cardData?.editor.border.color || ""}
+                  bordersize = {cardData?.editor.border.size || ""}
                 >
                   <ImgCrop
                     modalTitle="Editar Imagem"
                     modalOk='OK'
                     modalCancel='Cancelar'
                     aspect={
-                      adminData?.editor.size.width / adminData?.editor.size.height
+                      cardData?.editor.size.width / cardData?.editor.size.height
                     }
                     rotationSlider
                   >

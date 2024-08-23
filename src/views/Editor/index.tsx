@@ -42,7 +42,7 @@ const editorSettingsSchema = Yup.object().shape({
 interface IEditor {}
 
 const Editor = ({}: IEditor) => {
-  const adminData = {}
+  const cardData = {}
 
   const [updatingEditor, setUpdatingEditor] = useState(false)
 

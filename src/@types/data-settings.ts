@@ -1,12 +1,12 @@
 export interface IUserData {
-  adminId: string
-  adminName: string
-  adminEmail: string
+  id: string
+  name: string
+  email: string
 }
 
 export interface ISigninUser {
-  adminEmail: string
-  adminPassword: string
+  email: string
+  password: string
 }
 
 export interface IEditorSettings {
@@ -44,6 +44,6 @@ export interface IEditorSettingsForm {
   borderBottomLeft: number
 }
 
-export interface IAdminData {
+export interface IEditorData {
   editor: IEditorSettings
 }

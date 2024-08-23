@@ -4,6 +4,8 @@ Uma ferramenta para gerar cards personalizados para utilizar nas redes sociais
 
 #EuVou #TrilhasInova #TrilheiroConfirmado #InovaMaranhão #FAPEMA
 
+💻 publicado em <https://eu-vou-trilhas.vercel.app>
+
 ![exemplo da interface](image.webp)
 
 ## Desenvolvedor(es)

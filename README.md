@@ -7,10 +7,11 @@ Uma ferramenta para gerar cards personalizados para utilizar nas redes sociais
 💻 publicado em <https://eu-vou-trilhas.vercel.app>
 
 ![exemplo da interface](image.webp)
+![exemplo de uso em gif](public/20240823081517-f675b4c18c.gif)
 
 ## Desenvolvedor(es)
 
-* Luis Eduardo Silva dos Santos (@DJEDU28) \[Autor\]
+* Luis Eduardo Silva dos Santos (@DJEDU28) /[Autor\]
 * 
 
 

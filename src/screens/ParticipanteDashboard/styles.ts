@@ -5,7 +5,7 @@ import {
   responsiveTablet
 } from '@/utils/styles/globals'
 import Colors from '@/utils/styles/colors'
-import { InputName } from '@/utils/styles/inputs'
+import { InputName, LockBtn } from '@/utils/styles/inputs'
 
 export const ParticipanteDashboard = styled(Screen)`
   display: flex;
@@ -222,7 +222,7 @@ export const ParticipanteDashboardPostSelection = styled.div<IEditorSelection>`
     `}
 `
 
-export const ParticipanteDashboardExport = styled.div`
+export const ParticipanteDashboardExport = styled.div<LockBtn>`
   display: flex;
   justify-content: flex-end;
   column-gap: 12px;

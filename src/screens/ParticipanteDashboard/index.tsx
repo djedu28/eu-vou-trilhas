@@ -234,6 +234,9 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
                 borderSize = {adminData?.editor.border.size || ""}
               >
                 <ImgCrop
+                  modalTitle="Editar Imagem"
+                  modalOk='OK'
+                  modalCancel='Cancelar'
                   aspect={
                     adminData?.editor.size.width / adminData?.editor.size.height
                   }

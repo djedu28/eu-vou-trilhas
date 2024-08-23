@@ -18,6 +18,9 @@ import type { UploadChangeParam } from 'antd/es/upload'
 import useScrollbar from '@/hooks/useScrollbar'
 
 import { beforeUpload, onPreview } from '@/utils/functions/imageUpload'
+// import { IEditorSelection } from '@/utils/styles/globals'
+// import { ICardConfig } from '@/utils/styles/inputs'
+
 
 const editorSettingsSchema = Yup.object().shape({
   width: Yup.number().required().min(0),
@@ -114,43 +117,40 @@ const Editor = ({}: IEditor) => {
     }
   }
 
-  // useEffect(() => {
-  //   console.log(adminData)
-  // }, [adminData])
-
   const handleFieldChange = useCallback(() => {
     const formData = getValues()
+    
+    const editorData: ICardConfig = {};
 
-    const editorData = {}
+    // const width = formData.width !== editorData?.size.width
+    // const height = formData.height !== editorData?.size.height
+    // const top = formData.top !== editorData?.position.top
+    // const right = formData.right !== editorData?.position.right
+    // const bottom = formData.bottom !== editorData?.position.bottom
+    // const left = formData.left !== editorData?.position.left
+    // const isCircle = formData.isCircle !== editorData?.border.isCircle
+    // const borderTopLeft = formData.borderTopLeft !== editorData?.border.topLeft
+    // const borderTopRight =
+    //   formData.borderTopRight !== editorData?.border.topRight
+    // const borderBottomRight =
+    //   formData.borderBottomRight !== editorData?.border.bottomRight
+    // const borderBottomLeft =
+    //   formData.borderBottomLeft !== editorData?.border.bottomLeft
 
-    const width = formData.width !== editorData?.size.width
-    const height = formData.height !== editorData?.size.height
-    const top = formData.top !== editorData?.position.top
-    const right = formData.right !== editorData?.position.right
-    const bottom = formData.bottom !== editorData?.position.bottom
-    const left = formData.left !== editorData?.position.left
-    const isCircle = formData.isCircle !== editorData?.border.isCircle
-    const borderTopLeft = formData.borderTopLeft !== editorData?.border.topLeft
-    const borderTopRight =
-      formData.borderTopRight !== editorData?.border.topRight
-    const borderBottomRight =
-      formData.borderBottomRight !== editorData?.border.bottomRight
-    const borderBottomLeft =
-      formData.borderBottomLeft !== editorData?.border.bottomLeft
-
-    setSaveButtonEnable(
-      width ||
-        height ||
-        top ||
-        right ||
-        bottom ||
-        left ||
-        isCircle ||
-        borderTopLeft ||
-        borderTopRight ||
-        borderBottomRight ||
-        borderBottomLeft
-    )
+    // setSaveButtonEnable(
+    //   width ||
+    //     height ||
+    //     top ||
+    //     right ||
+    //     bottom ||
+    //     left ||
+    //     isCircle ||
+    //     borderTopLeft ||
+    //     borderTopRight ||
+    //     borderBottomRight ||
+    //     borderBottomLeft
+    // )
+    setSaveButtonEnable(true)
   }, [])
 
   const watchedValues = watch([

@@ -26,8 +26,3 @@ export default AppRoutes
 
 // =========================================== ROUTES
 
-interface RouteProps {
-  isAuthenticated: boolean
-  children: React.ReactNode
-}
-

@@ -6,7 +6,10 @@ import { FaPenToSquare } from 'react-icons/fa6'
 import { View } from '@/components'
 import ImgCrop from 'antd-img-crop'
 import { Button, Checkbox, Input, Upload } from 'antd'
-import { PlusOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { 
+  PlusOutlined, 
+  // InfoCircleOutlined 
+} from '@ant-design/icons'
 
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -118,9 +121,9 @@ const Editor = ({}: IEditor) => {
   }
 
   const handleFieldChange = useCallback(() => {
-    const formData = getValues()
+    // const formData = getValues()
     
-    const editorData: ICardConfig = {};
+    // const editorData: ICardConfig = {};
 
     // const width = formData.width !== editorData?.size.width
     // const height = formData.height !== editorData?.size.height

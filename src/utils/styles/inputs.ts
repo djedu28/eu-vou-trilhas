@@ -1,4 +1,4 @@
-import { boolean } from "yup"
+// import { boolean } from "yup"
 
 export interface InputName {
   color?: string,

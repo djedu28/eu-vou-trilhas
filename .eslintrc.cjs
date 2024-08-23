@@ -1,4 +1,3 @@
-import react from 'react'
 
 module.exports = {
   root: true,
@@ -18,7 +17,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: [react, 'jsx-a11y', 'jest', 'react-refresh', '@typescript-eslint'],
+  plugins: [
+    'react',
+    // 'jsx-a11y', 
+    // 'jest', 
+    'react-refresh', 
+    '@typescript-eslint'
+  ],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -31,18 +36,18 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/ban-ts-comment': 'off',
-    'jsx-a11y/alt-text': [
-      'warn',
-      {
-        elements: ['img'],
-        img: ['Image']
-      }
-    ],
-    'jsx-a11y/aria-props': 'warn',
-    'jsx-a11y/aria-proptypes': 'warn',
-    'jsx-a11y/aria-unsupported-elements': 'warn',
-    'jsx-a11y/role-has-required-aria-props': 'warn',
-    'jsx-a11y/role-supports-aria-props': 'warn',
+    // 'jsx-a11y/alt-text': [
+    //   'warn',
+    //   {
+    //     elements: ['img'],
+    //     img: ['Image']
+    //   }
+    // ],
+    // 'jsx-a11y/aria-props': 'warn',
+    // 'jsx-a11y/aria-proptypes': 'warn',
+    // 'jsx-a11y/aria-unsupported-elements': 'warn',
+    // 'jsx-a11y/role-has-required-aria-props': 'warn',
+    // 'jsx-a11y/role-supports-aria-props': 'warn',
     'no-empty-pattern': 'off'
   }
   // settings: {

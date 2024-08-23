@@ -16,7 +16,10 @@ import type { UploadChangeParam } from 'antd/es/upload'
 
 import { Controller, useForm } from 'react-hook-form'
 
-import { Button, Input } from 'antd'
+import { 
+  // Button, 
+  Input 
+} from 'antd'
 
 //import { useAdmin } from '@/contexts/AdminProvider'
 function useAdmin() {
@@ -43,10 +46,9 @@ function useAdmin() {
         size: "7px"
       }
     }
-
   }
   return { adminData }
-};
+}
 
 import { beforeUpload, onPreview } from '@/utils/functions/imageUpload'
 

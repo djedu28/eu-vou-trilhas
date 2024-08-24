@@ -14,11 +14,17 @@ export const ParticipanteDashboard = styled(Screen)`
   row-gap: 50px;
 
   background-repeat: no-repeat;
-  background-image: url('bg-fundo.png'), url('bg-fundo.webp');
+  /* background-image: url('bg-fundo.png'), url('bg-fundo.webp'); */
   background-position: center;
   background-size: cover;
 
-  background-color: black;
+  background: rgba(1,3,45,1);
+  background: linear-gradient(180deg, rgba(1,0,36,1) 0%, rgba(1,3,45,1) 35%, rgba(0,46,93,1) 100%);
+  background: linear-gradient(170deg, rgb(51, 13, 6) 0%, rgb(21, 8, 53) 20%, rgb(1, 5, 84) 38%, rgb(0, 46, 93) 100%);
+
+  @media (max-width:400px) {
+    background: linear-gradient(170deg, rgb(51, 13, 6) 0%, rgb(21, 8, 53) 12%, rgb(1, 5, 84) 38%, rgb(0, 46, 93) 100%);
+  }
 `
 
 export const ParticipanteDashboardHeader = styled.div`

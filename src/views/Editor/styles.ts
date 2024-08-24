@@ -130,7 +130,7 @@ export const EditorViewImageSelection = styled.div<IEditorSelection>`
 `
 export const CardContainerMock = styled.div<{escala:number}>`
   transform: ${({ escala }) => `scale(${escala})`};
-  margin-block: ${({ escala }) => `${-350 * (1 - escala)}`};
+  margin-block: ${({ escala }) => `${-350 * (1 - escala)}`}px;
 `
 export const CardContainerPrint = styled.div`
   /* display: none; */

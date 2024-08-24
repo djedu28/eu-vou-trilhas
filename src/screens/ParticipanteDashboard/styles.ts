@@ -179,8 +179,8 @@ export const ParticipanteDashboardPostSelection = styled.div<IEditorSelection>`
     align-items: center;
     row-gap: 5px;
 
-    font-size: 12px;
-    line-height: 13px;
+    font-size: 1.15rem;
+    line-height: 18px;
     font-weight: 600;
     text-align: center;
     color: rgba(0, 0, 0, 0.9);

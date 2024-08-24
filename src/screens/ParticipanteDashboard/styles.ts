@@ -315,15 +315,23 @@ export const Input = styled.input<InputName>`
   bottom: ${({bottom})=>bottom||0}px;
   width: 100%;
 `;
-export const Texto = styled.p<InputName>`
+export const Texto = styled.span<InputName>`
   position: absolute;
   pointer-events: none;
+  user-select: none;
 
   border: none;
+  outline: none;
   background: transparent;
   color: ${(({ color })=> color||"white")};
 
+  /* box-sizing: border-box; */
+  font-family: "Anton",'Roboto',sans-serif;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent !important;
+
   font-size: 30px;
+  line-height: 38px;
   font-weight: 200;
   letter-spacing: 0.5px;
   text-align: center;

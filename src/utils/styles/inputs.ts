@@ -1,8 +1,9 @@
 // import { boolean } from "yup"
 
 export interface InputName {
-  color?: string,
-  bottom: number,
+  color?:  string
+  escala?: number
+  bottom:  number
 }
 
 export interface LockBtn {

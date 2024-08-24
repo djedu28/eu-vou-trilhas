@@ -14,15 +14,16 @@ import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
 import type { UploadChangeParam } from 'antd/es/upload'
 
 
-import { Controller, useForm } from 'react-hook-form'
+import { Control, Controller, useForm } from 'react-hook-form'
 
-import { 
+import {
   // Button, 
-  Input 
+  Input
 } from 'antd'
 
-//import { useAdmin } from '@/contexts/AdminProvider'
-function useAdmin() {
+// import * as domtoimage from 'dom-to-image-more';
+
+function getCardData() {
   const cardData = {
     editor: {
       image: "/SouTrilheiro.png",
@@ -31,7 +32,7 @@ function useAdmin() {
         height: 250,
       },
       position: {
-        top:0,
+        top: 0,
         left: 0,
         right: 145,
         bottom: 320,
@@ -52,15 +53,16 @@ function useAdmin() {
 
 import { beforeUpload, onPreview } from '@/utils/functions/imageUpload'
 import useScreenSize from '@/hooks/use';
+import { CardData } from '@/utils/styles/card';
 
 interface IParticipanteDashboard { }
 
 const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
-  const { cardData } = useAdmin()
+  const { cardData } = getCardData()
 
   const configImg = useScreenSize()
 
-  const { control, watch} = useForm({
+  const { control, watch } = useForm({
     defaultValues: {
       name: ""
     }
@@ -107,7 +109,8 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
 
         // Continuar com html2canvas depois que a imagem estiver carregada
         const canvas = await html2canvas(ParticipanteDashboardPostRef.current!, {
-          useCORS: true
+          useCORS: true,
+          //letterRendering: true,
         })
 
         if (canvas.toBlob) {
@@ -130,11 +133,10 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
           URL.revokeObjectURL(localUrl)
         }
       } catch (err) {
-        console.error('Failed to download and export image:', err)
+        console.error('Falha ao baixar e exportar imagem:', err)
       }
     }
   }, [ParticipanteDashboardPostRef, cardData])
-
 
   const nome_informado = watch("name")
   const lock_download = !tempClientImage || !nome_informado
@@ -143,7 +145,7 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
   //   const escala = configImg.width / 540
   //   return value * escala
   // }
-  
+
   // const ES = escalonar
 
   const scale = configImg.width <= 540 ? (configImg.width || 540) / 540 : 1
@@ -223,86 +225,29 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
       </S.ParticipanteDashboardHeader>
       <S.ParticipanteDashboardWrapper>
         <S.ParticipanteDashboardHeadline>
-          Crie um post <b>#EuVou</b> exclusivo do Hackathon, 
+          Crie um post <b>#EuVou</b> exclusivo do Hackathon,
           personalizado com a sua imagem.
         </S.ParticipanteDashboardHeadline>
-        <i id='CARD-PARTICIPANTE' style= {{display:"none"}}/>
-        <div id="edt2" style={{ transform: `scale(${scale})`, marginBlock: -350 * (1- scale) }}>
-          <S.ParticipanteDashboardPost ref={ParticipanteDashboardPostRef} id="print">
-            {cardData && cardData.editor.image ? (
-              <>
-                <img src={cardData?.editor.image} alt="Post Image" />
-
-                <S.ParticipanteDashboardPostSelection
-                  width={cardData?.editor.size.width || 0}
-                  height={cardData?.editor.size.height || 0}
-                  // top={cardData?.editor.position?.top || 0}
-                  right={cardData?.editor.position?.right || 0}
-                  bottom={cardData?.editor.position?.bottom || 0}
-                  // left={cardData?.editor.position?.left || 0}
-                  iscircle={cardData?.editor.border.isCircle ? 1 : 0}
-                  bordertopleft={cardData?.editor.border.topLeft || 0}
-                  bordertopright={cardData?.editor.border.topRight || 0}
-                  borderbottomright={cardData?.editor.border.bottomRight || 0}
-                  borderbottomleft={cardData?.editor.border.bottomLeft || 0}
-                  bordercolor = {cardData?.editor.border.color || ""}
-                  bordersize = {cardData?.editor.border.size || ""}
-                >
-                  <ImgCrop
-                    modalTitle="Editar Imagem"
-                    modalOk='OK'
-                    modalCancel='Cancelar'
-                    aspect={
-                      cardData?.editor.size.width / cardData?.editor.size.height
-                    }
-                    rotationSlider
-                  >
-                    <Upload
-                      name="client-image"
-                      listType="picture-card"
-                      showUploadList={false}
-                      beforeUpload={beforeUpload}
-                      onChange={handleChangeClientImage}
-                      onPreview={onPreview}
-                      className="client-image-upload"
-                    >
-                      {tempClientImage ? (
-                        <img
-                          src={tempClientImage}
-                          alt="Client Image"
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover'
-                          }}
-                        />
-                      ) : (
-                        <div className="client-image-instructions">
-                          <TbHandClick />
-                          Clique e adicione sua foto
-                        </div>
-                      )}
-                    </Upload>
-                  </ImgCrop>
-                </S.ParticipanteDashboardPostSelection>
-              </>
-            ) : (
-              <S.ParticipanteDashboardPostLoading />
-            )}
-
-            <S.Texto bottom={214}>
-              {nome_informado ||"Meu Nome"}
-            </S.Texto>
-            <Controller
-              name="name"
-              control={control}
-              rules={{ required: 'Este campo é obrigatório' }}
-              render={({ field }) => <S.Input {...field} placeholder="MEU NOME" bottom={214} /> }
-            />
-          </S.ParticipanteDashboardPost>
+        <i id='CARD-PARTICIPANTE' style={{ display: "none" }} />
+        <div id="edt2" style={{ transform: `scale(${scale})`, marginBlock: -350 * (1 - scale) }}>
+          <CARD
+            cardData={cardData}
+            nome_informado={nome_informado}
+            control={control}
+            handleChangeClientImage={handleChangeClientImage}
+            tempClientImage={tempClientImage}
+          />
+        </div>
+        <div id="edt1" style={{ display: "none", width: "600px" }}>
+          <CARD
+            ParticipanteDashboardPostRef={ParticipanteDashboardPostRef}
+            cardData={cardData}
+            nome_informado={nome_informado}
+            tempClientImage={tempClientImage}
+          />
         </div>
         <S.ParticipanteDashboardLabel>
-          
+
           Clique no botão acima e escolha a sua melhor foto;
           <br />
           <br />
@@ -349,11 +294,11 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
       </S.ParticipanteDashboardWrapper>
       <footer>
         <div className="logos">
-          <img src="./logo-eixo-edu-braco.png"/>
-          <img src="./inovaMA.webp"/>
-          <img src="./LOGO-SITE-SECTI_branca.png"/>
+          <img src="./logo-eixo-edu-braco.png" />
+          <img src="./inovaMA.webp" />
+          <img src="./LOGO-SITE-SECTI_branca.png" />
         </div>
-        <p>Desenvolvido por  <a 
+        <p>Desenvolvido por  <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/djedu28"
@@ -364,3 +309,96 @@ const ParticipanteDashboard = ({ }: IParticipanteDashboard) => {
 }
 
 export default ParticipanteDashboard
+
+
+function CARD({
+  ParticipanteDashboardPostRef,
+  cardData,
+  nome_informado,
+  control,
+  handleChangeClientImage,
+  tempClientImage,
+}: {
+  ParticipanteDashboardPostRef?: React.LegacyRef<HTMLDivElement>
+  cardData: CardData
+  nome_informado: string
+  control?: Control<{ name: string; }, any>
+  handleChangeClientImage?: UploadProps['onChange']
+  tempClientImage: string
+}) {
+
+  return (
+    <S.ParticipanteDashboardPost ref={ParticipanteDashboardPostRef} id="print">
+      {cardData && cardData.editor?.image ? (
+        <>
+          <img src={cardData.editor?.image} alt="Post Image" />
+
+          <S.ParticipanteDashboardPostSelection
+            width={cardData.editor?.size?.width || 0}
+            height={cardData.editor?.size?.height || 0}
+            // top={cardData.editor?.position?.top || 0}
+            right={cardData.editor?.position?.right || 0}
+            bottom={cardData.editor?.position?.bottom || 0}
+            // left={cardData.editor?.position?.left || 0}
+            iscircle={cardData.editor?.border.isCircle ? 1 : 0}
+            bordertopleft={cardData.editor?.border.topLeft || 0}
+            bordertopright={cardData.editor?.border.topRight || 0}
+            borderbottomright={cardData.editor?.border.bottomRight || 0}
+            borderbottomleft={cardData.editor?.border.bottomLeft || 0}
+            bordercolor={cardData.editor?.border.color || ""}
+            bordersize={cardData.editor?.border.size || ""}
+          >
+            <ImgCrop
+              modalTitle="Editar Imagem"
+              modalOk='OK'
+              modalCancel='Cancelar'
+              aspect={
+                cardData.editor?.size.width ?? 0 / cardData.editor?.size.height ?? 0
+              }
+              rotationSlider
+            >
+              <Upload
+                name="client-image"
+                listType="picture-card"
+                showUploadList={false}
+                beforeUpload={beforeUpload}
+                onChange={handleChangeClientImage}
+                onPreview={onPreview}
+                className="client-image-upload"
+              >
+                {tempClientImage ? (
+                  <img
+                    src={tempClientImage}
+                    alt="Client Image"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                ) : (
+                  <div className="client-image-instructions">
+                    <TbHandClick />
+                    Clique e adicione sua foto
+                  </div>
+                )}
+              </Upload>
+            </ImgCrop>
+          </S.ParticipanteDashboardPostSelection>
+        </>
+      ) : (
+        <S.ParticipanteDashboardPostLoading />
+      )}
+
+      <S.Texto bottom={214}>
+        {nome_informado || "Meu Nome"}
+      </S.Texto>
+      {control && <Controller
+        name="name"
+        control={control}
+        rules={{ required: 'Este campo é obrigatório' }}
+        render={({ field }) => <S.Input {...field} placeholder="MEU NOME" bottom={214} />}
+      />}
+    </S.ParticipanteDashboardPost>
+  )
+}

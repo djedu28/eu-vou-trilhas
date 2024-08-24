@@ -128,3 +128,17 @@ export const EditorViewImageSelection = styled.div<IEditorSelection>`
       border-radius: 100%;
     `}
 `
+export const CardContainerMock = styled.div<{escala:number}>`
+  transform: ${({ escala }) => `scale(${escala})`};
+  margin-block: ${({ escala }) => `${-350 * (1 - escala)}`};
+`
+export const CardContainerPrint = styled.div`
+  /* display: none; */
+  width: 600px;
+  position: absolute;
+  z-index: -99;
+  pointer-events: none;
+
+  left: -700px;
+  
+`

@@ -98,7 +98,7 @@ export default function CARD({
                 name="name"
                 control={control}
                 rules={{ required: 'Este campo é obrigatório' }}
-                render={({ field }) => <S.Input {...field} placeholder="MEU NOME" bottom={214} />}
+                render={({ field }) => <S.Input {...field} bottom={214} />}
             />}
         </S.ParticipanteDashboardPost>
     )

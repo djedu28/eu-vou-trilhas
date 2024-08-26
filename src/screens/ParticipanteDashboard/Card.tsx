@@ -28,6 +28,9 @@ export default function CARD({
     tempClientImage: string;
 }) {
 
+
+    const handleTrim = (value) => value.trim();
+
     return (
         <S.ParticipanteDashboardPost ref={ParticipanteDashboardPostRef} id={id}>
             {cardData && cardData.editor?.image ? (
@@ -91,14 +94,19 @@ export default function CARD({
                 <S.ParticipanteDashboardPostLoading />
             )}
 
-            <S.Texto bottom={214}>
-                {nome_informado || "Meu Nome"}
-            </S.Texto>
+            {!control && <S.Texto bottom={214}>
+                {nome_informado || "MEU NOME"}
+            </S.Texto>}
             {control && <Controller
                 name="name"
                 control={control}
                 rules={{ required: 'Este campo é obrigatório' }}
-                render={({ field }) => <S.Input {...field} bottom={214} />}
+                render={({ field }) => <S.Input 
+                    {...field} 
+                    onBlur={() => field.onChange(handleTrim(field.value))}
+                    bottom={214} 
+                    placeholder="MEU NOME"
+                />}
             />}
         </S.ParticipanteDashboardPost>
     )

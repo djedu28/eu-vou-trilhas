@@ -206,18 +206,18 @@ export const ParticipanteDashboardPostSelection = styled.div<IEditorSelection>`
     height: ${({ height }) => `${height}px`} !important;
     
     border-top-left-radius: ${({ bordertopleft }) =>
-      `${bordertopleft}px`} !important;
+    `${bordertopleft}px`} !important;
     border-top-right-radius: ${({ bordertopright }) =>
-      `${bordertopright}px`} !important;
+    `${bordertopright}px`} !important;
     border-bottom-right-radius: ${({ borderbottomright }) =>
-      `${borderbottomright}px`} !important;
+    `${borderbottomright}px`} !important;
     border-bottom-left-radius: ${({ borderbottomleft }) =>
-      `${borderbottomleft}px`} !important;
+    `${borderbottomleft}px`} !important;
     
 
     ${({ iscircle }) =>
-      iscircle &&
-      css`
+    iscircle &&
+    css`
         border-radius: 100% !important;
       `}
   }
@@ -256,7 +256,7 @@ export const ParticipanteDashboardExport = styled.div<LockBtn>`
     }
 
     color: white;
-    background-color: ${({ lock }) => lock ? Colors.secondary : Colors.primary  };
+    background-color: ${({ lock }) => lock ? Colors.secondary : Colors.primary};
 
     /* &:nth-of-type(1) {
       background-color: #0a605f;
@@ -305,7 +305,7 @@ export const Input = styled.input<InputName>`
   border-radius: 3px;
 
   background: transparent;
-  color: transparent;
+  color: white;
 
   &:hover, &:focus {
     background: white;
@@ -318,8 +318,25 @@ export const Input = styled.input<InputName>`
   letter-spacing: 0.5px;
   text-align: center;
 
-  bottom: ${({bottom})=>bottom||0}px;
+  bottom: ${({ bottom }) => bottom || 0}px;
   width: 100%;
+
+  /* ocultando o placeholder */
+  ::-webkit-input-placeholder,
+  :-moz-placeholder,
+  ::-moz-placeholder,
+  :-ms-input-placeholder {
+    color: transparent;
+  }
+  &:focus, &:hover{
+    /* colorindo o placeholder */
+    ::-webkit-input-placeholder,
+    :-moz-placeholder,
+    ::-moz-placeholder,
+    :-ms-input-placeholder {
+      color: inherit;
+    }
+  }
 `;
 export const Texto = styled.span<InputName>`
   position: absolute;
@@ -329,7 +346,7 @@ export const Texto = styled.span<InputName>`
   border: none;
   outline: none;
   background: transparent;
-  color: ${(({ color })=> color||"white")};
+  color: ${(({ color }) => color || "white")};
 
   /* box-sizing: border-box; */
   font-family: "Anton",'Roboto',sans-serif;
@@ -341,6 +358,6 @@ export const Texto = styled.span<InputName>`
   font-weight: 200;
   letter-spacing: 0.5px;
   text-align: center;
-  bottom: ${({ bottom })=>bottom||0}px;
+  bottom: ${({ bottom }) => bottom || 0}px;
   width: 100%;
 `;

@@ -321,22 +321,6 @@ export const Input = styled.input<InputName>`
   bottom: ${({ bottom }) => bottom || 0}px;
   width: 100%;
 
-  /* ocultando o placeholder */
-  ::-webkit-input-placeholder,
-  :-moz-placeholder,
-  ::-moz-placeholder,
-  :-ms-input-placeholder {
-    color: transparent;
-  }
-  &:focus, &:hover{
-    /* colorindo o placeholder */
-    ::-webkit-input-placeholder,
-    :-moz-placeholder,
-    ::-moz-placeholder,
-    :-ms-input-placeholder {
-      color: inherit;
-    }
-  }
 `;
 export const Texto = styled.span<InputName>`
   position: absolute;
